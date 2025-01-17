@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button.delete {
+            background-color: #f44336;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .back-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px 10px 0 10px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:active {
+            background-color: #003d80;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+  </style>
+</head>
+<body>
+<h1>Orders</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="order : ${orders}">
+    <td th:text="${order.user.username}"></td>
+    <td th:text="${order.status}"></td>
+    <td>
+      <form th:action="@{/materials/confirmOrder(orderId=${order.id})}" method="post" style="display:inline;">
+        <button type="submit">Confirm</button>
+      </form>
+      <form th:action="@{/materials/deleteOrder(orderId=${order.id})}" method="post" style="display:inline;">
+        <button type="submit" class="delete">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/materials}" class="back-button">Back to Materials List</a>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Delete Material</title>
+  <style>
+        /* Styles for the delete page */
+        .delete-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .material-details {
+            margin-bottom: 20px;
+        }
+
+        .material-details h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .material-details p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .buttons .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-confirm {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background-color: #cc0000;
+        }
+
+        .btn-cancel {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="delete-container">
+  <!-- Material details -->
+  <div class="material-details">
+    <h2 th:text="${material.name}">Material Name</h2>
+    <p th:text="'Type: ' + ${material.type}">Type</p>
+    <p th:text="'Price: $' + ${material.price}">Price</p>
+    <p th:text="'Stock: ' + ${material.stock}">Stock</p>
+  </div>
+
+  <!-- Confirmation message -->
+  <p>Are you sure you want to delete this material?</p>
+
+  <!-- Buttons for confirmation and cancellation -->
+  <div class="buttons">
+    <form th:action="@{/materials/delete/{id}(id=${material.id})}" method="post">
+      <button type="submit" class="btn btn-confirm">Delete</button>
+    </form>
+    <a th:href="@{/materials}" class="btn btn-cancel">Cancel</a>
+  </div>
+</div>
+</body>
+</html>

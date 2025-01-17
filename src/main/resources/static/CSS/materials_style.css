@@ -1,0 +1,287 @@
+/* Reset styles */
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
+body {
+    background-color: #080710;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header .btn {
+    float: right;
+    background-color: #23a2f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+header .btn:hover {
+    background-color: #1845ad;
+}
+
+/* Main layout */
+.layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Filters section */
+.filters {
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(8, 7, 16, 0.6);
+}
+
+.filters h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.filters label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.filters select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    margin-bottom: 15px;
+}
+
+.filters .btn-filter {
+    width: 100%;
+    background-color: #23a2f6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.filters .btn-filter:hover {
+    background-color: #1845ad;
+}
+
+/* Materials section */
+.materials-section {
+    flex: 1;
+}
+
+.materials-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.material-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(8, 7, 16, 0.6);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.material-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(8, 7, 16, 0.8);
+}
+
+.material-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.material-card h2 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.material-type,
+.price,
+.stock {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.price {
+    font-weight: bold;
+    color: #23a2f6;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.actions a,
+.actions button {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.actions .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actions .edit-btn:hover {
+    background-color: #45a049;
+}
+
+.actions .delete-btn {
+    background-color: #ff512f;
+    color: white;
+    border: none;
+}
+
+.actions .delete-btn:hover {
+    background-color: #f09819;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+.filters input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+}
+
+.filters input[type="number"]::placeholder {
+    color: #e5e5e5;
+}
+
+.filters select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+}
+
+.filters select option {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.search-bar {
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-filter {
+    background-color: #23a2f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-filter:hover {
+    background-color: #1845ad;
+}
+
+.add-to-cart-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-to-cart-form label {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.add-to-cart-form input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.btn-add {
+    background-color: #23a2f6;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #1845ad;
+}

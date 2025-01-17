@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Sign Up - Construction Materials</title>
+    <link rel="stylesheet" th:href="@{/CSS/styles.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+
+<form th:action="@{/signup}" method="post">
+    <h3>Create Your Account</h3>
+
+    <!-- Error Message -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Success Message -->
+    <div th:if="${success}" class="success-message">
+        <p th:text="${success}"></p>
+    </div>
+
+    <!-- Username Input -->
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username"
+           th:value="${username}" required>
+
+    <!-- Email Input -->
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email"
+           th:value="${email}" required>
+
+    <!-- Password Input -->
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+    <!-- Confirm Password Input -->
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
+
+    <!-- Password Mismatch Error -->
+    <p id="password-error" class="error-message" style="display: none; color: red;">Passwords do not match!</p>
+
+    <!-- Submit Button -->
+    <button type="submit">Sign Up</button>
+
+    <!-- Link to Login -->
+    <div class="signup-link">
+        <p>Already have an account? <a th:href="@{/}">Login</a></p>
+    </div>
+</form>
+</body>
+</html>

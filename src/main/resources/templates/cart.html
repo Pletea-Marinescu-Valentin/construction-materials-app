@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Your Cart</title>
+  <link rel="stylesheet" th:href="@{/CSS/cart_style.css}">
+</head>
+<body>
+<header>
+  <h1>Your Cart</h1>
+</header>
+
+<div class="cart-container">
+  <!-- If the cart is empty -->
+  <div th:if="${cart.items.size() == 0}" class="empty-cart">
+    <p>Your cart is empty!</p>
+    <a th:href="@{/materials-user}" class="btn">Continue Shopping</a>
+  </div>
+
+  <!-- Cart items list -->
+  <div th:if="${cart.items.size() > 0}">
+    <table class="cart-table">
+      <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${cart.items}">
+        <!-- Material image -->
+        <td>
+          <img th:src="@{'/CSS/images/' + ${item.material.id} + '.png'}"
+               onerror="this.onerror=null;this.src='/CSS/images/default.png'"
+               alt="Material Image" class="cart-image">
+        </td>
+        <!-- Material name -->
+        <td th:text="${item.material.name}"></td>
+        <!-- Quantity -->
+        <td>
+          <!-- Form to update quantity -->
+          <form th:action="@{/materials-user/cart/edit/{materialId}(materialId=${item.material.id})}" method="post">
+            <input type="number" name="quantity" th:value="${item.quantity}" min="1" required>
+            <button type="submit" class="btn-edit">Update</button>
+          </form>
+        </td>
+        <!-- Unit price -->
+        <td th:text="'$' + ${item.material.price}"></td>
+        <!-- Total price for this material -->
+        <td th:text="'$' + (${item.material.price} * ${item.quantity})"></td>
+        <!-- Actions -->
+        <td>
+          <form th:action="@{/materials-user/cart/remove/{materialId}(materialId=${item.material.id})}" method="post">
+            <button type="submit" class="btn-remove">Remove</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Cart total -->
+    <div class="cart-total">
+      <h2>Total: <span th:text="'$' + ${cart.getTotal()}"></span></h2>
+      <form th:action="@{/materials-user/cart/checkout}" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-success">Checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
+<a href="/materials-user" class="back-button">Back to Materials</a>
+</body>
+</html>

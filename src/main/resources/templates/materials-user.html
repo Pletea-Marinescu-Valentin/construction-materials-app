@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Materials List</title>
+  <link rel="stylesheet" th:href="@{/CSS/materials_style.css}">
+</head>
+<body>
+<header>
+  <h1>List of Materials</h1>
+  <a th:href="@{/materials-user/cart}" class="btn">View Cart</a>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" class="btn btn-danger">Logout</button>
+  </form>
+</header>
+
+<div class="layout">
+  <!-- Filters Section -->
+  <aside class="filters">
+    <h2>Filters</h2>
+    <form th:action="@{/materials-user}" method="get">
+      <label for="type">Select Type:</label>
+      <select name="type" id="type">
+        <option value="" selected>All</option>
+        <option value="thermal_insulation">Thermal Insulation</option>
+        <option value="waterproofing">Waterproofing</option>
+        <option value="cement">Cement, Mortar, Plaster, Screed</option>
+        <option value="roofs">Roofs</option>
+        <option value="wood">Construction Wood</option>
+        <option value="walls">Partition Walls and Ceilings</option>
+        <option value="masonry">Masonry and Construction Steel</option>
+        <option value="mixers">Concrete Mixers, Wheelbarrows, Raffia Bags</option>
+        <option value="scaffolding">Scaffolding and Ladders</option>
+        <option value="drainage">Drainage and Sewerage</option>
+        <option value="rainwater_systems">Rainwater Systems</option>
+      </select>
+
+      <label for="minPrice">Minimum Price:</label>
+      <input type="number" name="minPrice" id="minPrice" placeholder="Min Price" min="0">
+
+      <label for="maxPrice">Maximum Price:</label>
+      <input type="number" name="maxPrice" id="maxPrice" placeholder="Max Price" min="0">
+
+      <label for="search">Search:</label>
+      <input type="text" name="search" id="search" placeholder="Search materials..." class="search-bar">
+
+      <label for="sort">Sort by Price:</label>
+      <select name="sort" id="sort">
+        <option value="" selected>None</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+
+      <button type="submit" class="btn-filter">Apply Filter</button>
+    </form>
+  </aside>
+
+  <!-- Materials Section -->
+  <section class="materials-section">
+    <div class="materials-container">
+      <div class="material-card" th:each="material, iterStat : ${materials}">
+        <!-- Material Image -->
+        <img th:src="@{'/CSS/images/' + ${material.id} + '.png'}"
+             onerror="this.onerror=null;this.src='/CSS/images/default.png'"
+             alt="Material Image" class="material-image">
+
+        <!-- Material Details -->
+        <h2 th:text="${material.name}"></h2>
+        <p class="material-type" th:text="'Type: ' + ${material.type}"></p>
+        <p class="price" th:text="'Price: $' + ${material.price}"></p>
+        <p class="stock" th:text="'Stock: ' + ${material.stock}"></p>
+
+        <!-- Form for Adding to Cart -->
+        <form th:action="@{/materials-user/cart/add/{id}(id=${material.id})}" method="post">
+          <input type="number" name="quantity" value="1" min="1" required>
+          <button type="submit" class="btn-add">Add To Cart</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <footer>
+      <div class="pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/materials-user(page=${currentPage - 1})}" class="btn">Previous</a>
+        <span th:text="'Page ' + (${currentPage + 1}) + ' of ' + ${totalPages}"></span>
+        <a th:if="${currentPage + 1 < totalPages}" th:href="@{/materials-user(page=${currentPage + 1})}" class="btn">Next</a>
+      </div>
+    </footer>
+  </section>
+</div>
+</body>
+</html>
